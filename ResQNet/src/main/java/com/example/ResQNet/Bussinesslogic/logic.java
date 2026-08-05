@@ -1,4 +1,4 @@
 package com.example.ResQNet.Bussinesslogic;
 
-public class hjjh {
+public class logic {
 }
