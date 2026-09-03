@@ -18,7 +18,7 @@ import {
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import Button from "../components/Button.jsx";
-import heroImage from "../assets/images/savior.png";
+import heroImage from "../assets/images/Savior.png";
 import bgRedNetwork from "../assets/backgrounds/bg_red_network.jpg";
 import network from "../assets/images/network.png";
 import volunteer from "../assets/images/voulnteer.png";
