@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Global base ---------- */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    @apply bg-rq-bg text-rq-text font-body antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    @apply font-display;
+}
+
+
+/* ---------- Reusable pieces ---------- */
+
+
+/* The red "blood drop" shape used across the brand (logo, hero accents) */
+
+.blood-drop {
+    width: 70px;
+    height: 90px;
+    background: linear-gradient(180deg, #ff2b3a 0%, #8f0009 100%);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(45deg);
+    box-shadow: 0 0 40px rgba(227, 6, 19, 0.45);
+}
+
+
+/* Soft red radial glow used behind hero art / icons */
+
+.glow-bg {
+    background: radial-gradient(circle at center, rgba(227, 6, 19, 0.25) 0%, rgba(227, 6, 19, 0) 70%);
+}
+
+
+/* Thin gradient divider line, echoes the heartbeat/red line motif */
+
+.rq-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e30613, transparent);
+}
+
+
+/* Scrollbar styling to match the dark theme */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3a3a3a;
+    border-radius: 4px;
+}
