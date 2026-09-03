@@ -44,6 +44,20 @@ npm run dev
 
 Then open the printed local URL (usually http://localhost:5173).
 
+## Deploy on Render
+
+This repository includes a `render.yaml` configured for a Render Static Site.
+Create a new Blueprint from the GitHub repository, or create a Static Site
+manually with these settings:
+
+- **Build command**: `npm ci && npm run build`
+- **Publish directory**: `dist`
+
+In the Render service environment variables, set `VITE_API_URL` to the public
+URL of your deployed backend, including `/api`, for example:
+`https://your-backend-service.onrender.com/api`. Vite injects this value during
+the build, so redeploy after changing it.
+
 ## Where things live
 
 - **Colors & fonts**: `tailwind.config.js` under `theme.extend.colors.rq`
