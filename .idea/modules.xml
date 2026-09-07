@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ResQNet.iml" filepath="$PROJECT_DIR$/.idea/ResQNet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.example.ResQNet.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.example.ResQNet.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.example.ResQNet.test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.example.ResQNet.test.iml" />
     </modules>
   </component>
 </project>

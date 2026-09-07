@@ -1,19 +1,20 @@
 package com.example.ResQNet.DTO;
 
 import com.example.ResQNet.Models.Role;
+import jakarta.validation.constraints.*;
 import lombok.Data;
-import jakarta.validation.constraints.Email;
 
 @Data
 public class Registeruserrequest {
+
     @NotBlank(message = "Name is required")
     private String name;
 
     @NotBlank(message = "Email is required")
-    @Email(message = "Email must be valid")
+    @Email(message = "Invalid email format")
     private String email;
 
-    @NotBlank(message = "Phone is required")
+    @Pattern(regexp = "^[+]?[0-9]{10,15}$", message = "Invalid phone number")
     private String phone;
 
     @NotBlank(message = "Password is required")
