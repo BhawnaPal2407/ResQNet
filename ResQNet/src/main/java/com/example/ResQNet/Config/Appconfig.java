@@ -37,9 +37,12 @@ public class Appconfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
+            .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
+                // Actuator Health & System Endpoints
+                .requestMatchers("/actuator/**", "/h2-console/**", "/", "/index.html", "/error").permitAll()
                 // Public endpoints
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/blood-requests").permitAll()
@@ -84,7 +87,14 @@ public class Appconfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOriginPatterns(List.of("*"));
+        String originsStr = System.getenv().getOrDefault("CORS_ALLOWED_ORIGINS", "*");
+        if (originsStr.contains(",")) {
+            config.setAllowedOrigins(List.of(originsStr.split(",")));
+        } else if ("*".equals(originsStr)) {
+            config.setAllowedOriginPatterns(List.of("*"));
+        } else {
+            config.setAllowedOrigins(List.of(originsStr));
+        }
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);

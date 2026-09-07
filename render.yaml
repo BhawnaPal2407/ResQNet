@@ -1,0 +1,44 @@
+services:
+  # ── ResQNet Spring Boot Backend Web Service ─────────────────────────────────
+  - type: web
+    name: resqnet-backend
+    runtime: docker
+    dockerfilePath: ./ResQNet/Dockerfile
+    dockerContext: ./ResQNet
+    plan: free
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: resqnet-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: resqnet-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: resqnet-db
+          property: password
+      - key: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+        value: org.postgresql.Driver
+      - key: SPRING_JPA_DATABASE_PLATFORM
+        value: org.hibernate.dialect.PostgreSQLDialect
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_INITIAL_EMAIL
+        value: admin@resqnet.com
+      - key: ADMIN_INITIAL_PASSWORD
+        value: Admin@123
+      - key: CORS_ALLOWED_ORIGINS
+        value: "*"
+
+databases:
+  # ── ResQNet PostgreSQL Database Service ─────────────────────────────────────
+  - name: resqnet-db
+    plan: free
+    databaseName: resqdb
+    user: resquser
