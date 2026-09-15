@@ -22,6 +22,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -89,11 +90,15 @@ public class Appconfig {
         CorsConfiguration config = new CorsConfiguration();
         String originsStr = System.getenv().getOrDefault("CORS_ALLOWED_ORIGINS", "*");
         if (originsStr.contains(",")) {
-            config.setAllowedOrigins(List.of(originsStr.split(",")));
+            List<String> origins = Arrays.stream(originsStr.split(","))
+                    .map(String::trim)
+                    .filter(s -> !s.isEmpty())
+                    .toList();
+            config.setAllowedOrigins(origins);
         } else if ("*".equals(originsStr)) {
             config.setAllowedOriginPatterns(List.of("*"));
         } else {
-            config.setAllowedOrigins(List.of(originsStr));
+            config.setAllowedOrigins(List.of(originsStr.trim()));
         }
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));

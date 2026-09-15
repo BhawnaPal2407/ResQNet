@@ -15,7 +15,6 @@ import java.util.List;
  * Admin-only endpoints. All routes require ROLE_ADMIN.
  * Base path: /api/admin
  */
-@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/admin")
 @RequiredArgsConstructor
