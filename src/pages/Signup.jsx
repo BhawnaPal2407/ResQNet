@@ -101,7 +101,7 @@ export default function Signup() {
         // Spring validation errors come as an object of field → message
         message = Object.values(responseData.errors).join(", ");
       } else if (!err.response) {
-        message = "Cannot reach the server. Make sure the backend is running on http://localhost:8080";
+        message = "Cannot reach the server. Make sure the backend is running and accessible.";
       }
 
       setError(message);
