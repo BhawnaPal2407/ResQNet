@@ -89,16 +89,14 @@ public class Appconfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         String originsStr = System.getenv().getOrDefault("CORS_ALLOWED_ORIGINS", "*");
-        if (originsStr.contains(",")) {
-            List<String> origins = Arrays.stream(originsStr.split(","))
+        if ("*".equals(originsStr.trim())) {
+            config.setAllowedOriginPatterns(List.of("*"));
+        } else {
+            List<String> origins = java.util.Arrays.stream(originsStr.split(","))
                     .map(String::trim)
                     .filter(s -> !s.isEmpty())
                     .toList();
-            config.setAllowedOrigins(origins);
-        } else if ("*".equals(originsStr)) {
-            config.setAllowedOriginPatterns(List.of("*"));
-        } else {
-            config.setAllowedOrigins(List.of(originsStr.trim()));
+            config.setAllowedOriginPatterns(origins);
         }
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
